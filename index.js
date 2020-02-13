@@ -2,15 +2,29 @@ console.log("before");
 // setTimeout(() => {
 //   console.log("reading a user from the database");
 // }, 3000);
-const user = getUser(1, function(user) {
-  console.log("User", user.name);
-  getRespositories(user.name, function(repo) {
-    console.log("Repo", repo);
-  });
-});
+const user = getUser(1, User);
+
+function User(user) {
+  // console.log("User", user.name);
+  getRespositories(user.name, getRepo);
+}
+
 console.log(user);
+function displayCommits(commit) {
+  console.log("commit", commit);
+}
+function getRepo(repo) {
+  console.log("Repo", repo);
+  getCommit(repo[0], displayCommits);
+}
 
 console.log("after");
+function getCommit(repo, callback) {
+  setTimeout(() => {
+    console.log("fetching repo");
+    callback(["commit1", "commit2"]);
+  }, 3000);
+}
 
 function getUser(id, callback) {
   setTimeout(() => {
