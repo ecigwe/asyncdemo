@@ -17,19 +17,27 @@ console.log("before");
 //   console.log("Repo", repo);
 //   getCommit(repo[0], displayCommits);
 // }
-getUser(1)
-  .then(user => {
-    return getRespositories(user.name);
-  })
-  .then(repo => {
-    return getCommit(repo[0]);
-  })
-  .then(commits => {
-    console.log(commits);
-  })
-  .catch(err => {
-    console.log("Error", err.message);
-  });
+// getUser(1)
+//   .then(user => {
+//     return getRespositories(user.name);
+//   })
+//   .then(repo => {
+//     return getCommit(repo[0]);
+//   })
+//   .then(commits => {
+//     console.log(commits);
+//   })
+//   .catch(err => {
+//     console.log("Error", err.message);
+//   });
+
+let commit = async function() {
+  let user = await getUser();
+  let repo = await getRespositories(user.name);
+  let commit = await getCommit(repo[0]);
+  console.log(commit);
+};
+commit();
 
 console.log("after");
 function getCommit(repo) {
